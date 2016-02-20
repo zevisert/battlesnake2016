@@ -1,6 +1,7 @@
 import bottle
 import os
 
+SNAKE_ID = 'ae68ef2a-2fc7-47a0-8b6b-cc7ae5b80d66'
 
 @bottle.route('/static/<path:path>')
 def static(path):
@@ -15,7 +16,7 @@ def index():
     )
 
     return {
-        'color': '#00ff00',
+        'color': '#F95759',
         'head': head_url
     }
 
