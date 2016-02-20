@@ -38,6 +38,7 @@ def start():
     width = data.get('width')
     current_game = game.Game(game_name=game_name, width=width, height=height, mode=mode)
     game.games[game_name] = current_game
+    print game.games
 
     # TODO: Do things with data
 
