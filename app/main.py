@@ -2,14 +2,16 @@ import bottle
 import os
 
 import utils
+from game import Game
 
-gaming = False
 NORTH = 'north'
 SOUTH = 'south'
 EAST = 'east'
 WEST = 'west'
 WIDTH = 0
 HEIGHT = 0
+
+games = {}
 
 LAST_DIRECTION = 'NORTH'
 
@@ -34,10 +36,14 @@ def index():
 @bottle.post('/start')
 def start():
     data = bottle.request.json
+    game_name = data.get('game')
+    mode = data.get('mode')
+    height = data.get('height')
+    width = data.get('width')
+    game = Game(game_name=game_name, width=width, height=height, mode=mode)
+    games[game_name] = game
 
     # TODO: Do things with data
-
-    gaming = True
 
     return {
         'taunt': 'battlesnake-python!'
