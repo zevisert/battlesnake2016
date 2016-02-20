@@ -54,8 +54,11 @@ def closest_food(snake, foods):
             min_food = f
     return min_food
 
-# boolean result if a specified cell is a snake body
 def is_snake(coord, snakes):
+    """
+    Given a specific coordinate,
+    return if that cell is occupied by a snake's body (head inclusive)
+    """
     for s in snakes:
         for body in s.coords:
             if coord == body:
@@ -63,6 +66,10 @@ def is_snake(coord, snakes):
     return False
 
 def is_snake_head(coord, snakes):
+    """
+    Given a specific coordinate,
+    return if that cell is occupied by a snake's head
+    """
     for s in snakes:
         if s.coords[0] == coord:
             return True
