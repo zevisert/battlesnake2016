@@ -11,3 +11,11 @@ def closest_food(current_position, food_positions):
     Given the current position, returns the closest food position
     """
     return food_positions[0]
+
+# boolean result if a specified cell is a snake body
+def is_snake(coord, snakes):
+    for s in snakes:
+        for body in s.coords:
+            if coord == body:
+                return True
+    return False
