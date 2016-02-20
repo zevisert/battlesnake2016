@@ -12,8 +12,6 @@ WEST = 'west'
 WIDTH = 0
 HEIGHT = 0
 
-LAST_DIRECTION = 'NORTH'
-
 @bottle.route('/static/<path:path>')
 def static(path):
     return bottle.static_file(path, root='static/')
@@ -71,7 +69,7 @@ def move():
     print(possible_pos)
 
     destination = get_destination(snakes, walls, foods, golds)
-    direction = get_next_position(destination, snakes, walls)
+    direction = get_next_position(destination, snakes, walls, game.games[game_name].get_last_direction())
     game.games[game_name].set_last_direction('direction')
 
     return {
@@ -108,7 +106,7 @@ def get_destination(snakes, walls, foods, golds):
         return close_food
     return None
 
-def get_next_position(destination, snakes, walls):
+def get_next_position(destination, snakes, walls, last_direction):
     """
     Given a destination coordinate, and all snakes and walls on board
     Find the direction (north, east, west, south) to move
@@ -132,9 +130,9 @@ def get_next_position(destination, snakes, walls):
     directions[SOUTH] = [head[0], head[1] - 1]
 
     # remove last direction from positions and place at front of list
-    if LAST_DIRECTION in positions:
-        positions.remove(LAST_DIRECTION)
-        positions = [LAST_DIRECTION] + positions
+    if last_direction in positions:
+        positions.remove(last_direction)
+        positions = [last_direction] + positions
 
     # remove destination from positions and place at front of list
     if destination is not None and direction_to_move in positions:
