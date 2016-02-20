@@ -85,7 +85,7 @@ def get_attack_head(snakes):
     Gives snakes
     returns coords of head of snake we can kill
     """
-    my_snake = find_my_snake()
+    my_snake = find_my_snake(snakes)
     my_length = get_snake_length(my_snake)
     my_head = get_snake_head(my_snake)
     min_distance = float("inf")
