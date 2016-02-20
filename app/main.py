@@ -145,19 +145,7 @@ def get_next_position(game_name, destination, snakes, walls, last_direction):
         new_coord = directions[p]
         if utils.is_valid(game_name, new_coord, snakes, walls):
             return p
-    return LAST_DIRECTION
-
-
-def get_next_direction(possible_pos, **kwargs):
-    """
-    Given a destination coordinate and possible directions, determine which direction the snake should end up moving
-    """
-    destination = kwargs.pop('destination', None)
-    direction = LAST_DIRECTION
-    if direction in possible_pos:
-        return direction
-    else:
-        return possible_pos[0]  # change this
+    return last_direction
 
 
 def possible_positions(walls, snakes, head):
