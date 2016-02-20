@@ -62,9 +62,10 @@ def move():
     # TODO: Do things with data
     snake = utils.find_my_snake(snakes)
     snake_head = utils.get_snake_head(snake)
-    possible_pos = possible_positions(walls=walls, snakes=snakes, head=snake_head)
+    
+    # possible_pos = possible_positions(walls=walls, snakes=snakes, head=snake_head)
 
-    print(possible_pos)
+    # print(possible_pos)
 
     destination = get_destination(snakes, walls, foods, golds)
     direction = get_next_position(game_name, destination, snakes, walls, game.games[game_name].get_last_direction())
