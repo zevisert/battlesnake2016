@@ -4,6 +4,10 @@ SNAKE_ID = 'ae68ef2a-2fc7-47a0-8b6b-cc7ae5b80d66'
 WIDTH = 0
 HEIGHT = 0
 FOOD_THRESH = 50
+NORTH = 'north'
+SOUTH = 'south'
+WEST = 'west'
+EAST = 'east'
 
 def find_my_snake(snakes):
     """
@@ -124,3 +128,15 @@ def need_food(snakes):
         return True
     return False
 
+
+def direction_to_move(my_coord, destination):
+    x_dist = my_coord[0]-destination[0]
+    y_dist = my_coord[1]-destination[1]
+
+    abs_x = abs(x_dist)
+    abs_y = abs(y_dist)
+
+    if abs_x > abs_y:
+        return WEST if x_dist > 0 else EAST
+    else:
+        return NORTH if y_dist > 0 else SOUTH
