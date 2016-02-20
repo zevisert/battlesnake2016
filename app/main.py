@@ -70,7 +70,7 @@ def move():
 
     destination = get_destination(snakes, walls, foods, golds)
     direction = get_next_position(game_name, destination, snakes, walls)
-    game.games[game_name].set_last_direction(direction)
+    # game.games[game_name].set_last_direction(direction)
 
     return {
         'move': direction,
