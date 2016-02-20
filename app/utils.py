@@ -5,3 +5,7 @@ def find_my_snake(snakes):
     for s in snakes:
         if s.id == SNAKE_ID:
             return s
+
+# returns true/false if coor is a wall
+def is_wall(coor, walls):
+    return coor in walls
