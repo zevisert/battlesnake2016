@@ -141,7 +141,7 @@ def need_food(snakes):
     """
     my_snake = find_my_snake(snakes)
     my_snake_length = get_snake_length(my_snake)
-    if my_snake.get("health") < FOOD_THRESH or my_snake_length < average_snake_length(snakes):
+    if my_snake.get("health") < FOOD_THRESH or my_snake_length < (average_snake_length(snakes) + 1):
         return True
     return False
 
