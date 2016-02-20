@@ -85,8 +85,6 @@ def end():
     # TODO: Do things with data
 
     gaming = False
-    print "End of the game, trying pop for " + data.get('game') + " from " + game.games
-    game.games.pop(data.get('game'))
 
     return {
         'taunt': 'battlesnake-python!'
