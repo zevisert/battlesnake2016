@@ -3,6 +3,7 @@ from math import sqrt
 SNAKE_ID = 'ae68ef2a-2fc7-47a0-8b6b-cc7ae5b80d66'
 WIDTH = 0
 HEIGHT = 0
+FOOD_THRESH = 50
 
 def find_my_snake(snakes):
     """
@@ -91,3 +92,35 @@ def is_snake_head(coord, snakes):
         if s.get('coords')[0] == coord:
             return True
     return False
+
+def get_snake_length(snake):
+    """
+    Given snake
+    retuns snake length
+    """
+    return len(snake.get("coords"))
+
+def average_snake_length(snakes):
+    """
+    Given snakes
+    reutrns average snake length
+    """
+    length_sum = 0
+    count = 0
+    for s in snakes:
+        if s is not find_my_snake(snakes):
+            length_sum += get_snake_length(s)
+            count += 1
+    return int(length_sum / count)
+
+def need_food(snakes):
+    """
+    Given snakes
+    return if we should get food or not
+    """
+    my_snake = find_my_snake(snakes)
+    my_snake_length = get_snake_length(my_snake)
+    if my_snake.get("health") < FOOD_THRESH or my_snake_length < average_snake_length(snakes):
+        return True
+    return False
+

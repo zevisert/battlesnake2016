@@ -1,5 +1,6 @@
-import bottle
 import os
+
+import bottle
 
 import utils
 from game import Game
@@ -62,8 +63,8 @@ def move():
     snakes = data.get('snakes', [])
     snake = utils.find_my_snake(data.get('snakes', []))
     snake_head = utils.get_snake_head(snake)
-    possible_pos = possible_positions(walls=data.get('walls'), snakes=snakes, head=snake_head)
-    direction = get_next_direction(possible_pos)
+    possible_pos = possible_positions(walls=data.get('walls', []), snakes=snakes, head=snake_head)
+    direction = get_next_direction(possible_pos, destination=utils.closest_food(snake, data.get('food')))
     LAST_DIRECTION = direction
 
     return {
@@ -109,10 +110,10 @@ def possible_positions(walls, snakes, head):
     """
     possibilities = []
     directions = {}
-    directions[EAST] = [head[0]+1, head[1]]
-    directions[WEST] = [head[0]-1, head[1]]
-    directions[NORTH] = [head[0], head[1]+1]
-    directions[SOUTH] = [head[0], head[1]-1]
+    directions[EAST] = [head[0] + 1, head[1]]
+    directions[WEST] = [head[0] - 1, head[1]]
+    directions[NORTH] = [head[0], head[1] + 1]
+    directions[SOUTH] = [head[0], head[1] - 1]
 
     for direction, pos in directions.items():
         if utils.is_wall(pos, walls) or utils.is_snake(pos, snakes):
