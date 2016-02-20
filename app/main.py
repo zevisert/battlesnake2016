@@ -116,7 +116,7 @@ def get_destination(snakes, walls, foods, golds):
     return None
 
 
-def get_next_position(game_name, destination, snakes, walls, last_direction):
+def get_next_position(game_name, destination, snakes, walls):
     """
     Given a destination coordinate, and all snakes and walls on board
     Find the direction (north, east, west, south) to move
@@ -140,9 +140,9 @@ def get_next_position(game_name, destination, snakes, walls, last_direction):
     directions[SOUTH] = [head[0], head[1] - 1]
 
     # remove last direction from positions and place at front of list
-    if last_direction in positions:
-        positions.remove(last_direction)
-        positions = [last_direction] + positions
+    # if last_direction in positions:
+    #     positions.remove(last_direction)
+    #     positions = [last_direction] + positions
 
     # remove destination from positions and place at front of list
     if destination is not None and direction_to_move in positions:
@@ -157,7 +157,7 @@ def get_next_position(game_name, destination, snakes, walls, last_direction):
         if utils.is_valid(game_name, new_coord, snakes, walls):
             print "{} is a valid direction to move".format(p)
             return p
-    return last_direction
+    return NORTH
 
 
 # def possible_positions(walls, snakes, head):
