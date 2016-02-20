@@ -148,7 +148,7 @@ def is_safe(size, coord, snakes, walls):
         if not is_valid(size, coord, snakes, walls, safety_check=False):
             invalid_count += 1
 
-    return invalid_count == 4
+    return invalid_count != 4
 
 def is_snake_head(coord, snakes):
     """
