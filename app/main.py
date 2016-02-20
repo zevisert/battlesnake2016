@@ -104,6 +104,10 @@ def get_destination(snakes, walls, foods, golds):
     if utils.need_food(snakes):
         close_food = utils.closest_food(my_snake, foods)
         return close_food
+    else:
+        close_gold = utils.closest_gold(my_snake, golds)
+        if close_gold:
+            return close_gold
     return None
 
 
