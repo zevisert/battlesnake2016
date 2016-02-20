@@ -77,7 +77,7 @@ def move():
 
     return {
         'move': direction,
-        'taunt': 'battlesnake-python!'
+        'taunt': utils.get_taunt()
     }
 
 
@@ -166,11 +166,11 @@ def possible_positions(walls, snakes, head):
     directions = {}
     directions[EAST] = [head[0] + 1, head[1]]
     directions[WEST] = [head[0] - 1, head[1]]
-    directions[NORTH] = [head[0], head[1] + 1]
-    directions[SOUTH] = [head[0], head[1] - 1]
+    directions[NORTH] = [head[0], head[1] - 1]
+    directions[SOUTH] = [head[0], head[1] + 1]
 
     for direction, pos in directions.items():
-        if utils.is_wall(pos, walls) or utils.is_snake(pos, snakes):
+        if not utils.is_valid(pos, snakes, walls):
             continue
         possibilities.append(direction)
     return possibilities
