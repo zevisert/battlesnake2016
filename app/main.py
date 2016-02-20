@@ -85,10 +85,11 @@ if __name__ == '__main__':
     bottle.run(application, host=os.getenv('IP', '0.0.0.0'), port=os.getenv('PORT', '8080'))
 
 
-def get_next_direction(possible_pos, destination):
+def get_next_direction(possible_pos, **kwargs):
     """
     Given a destination coordinate and possible directions, determine which direction the snake should end up moving
     """
+    destination = kwargs.pop('destination', None)
     direction = LAST_DIRECTION
     if direction in possible_pos:
         return direction
