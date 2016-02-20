@@ -67,9 +67,9 @@ def move():
     # possible_pos = possible_positions(walls=walls, snakes=snakes, head=snake_head)
 
     # print(possible_pos)
-
+    size = (data.get('width'), data.get('height'))
     destination = get_destination(snakes, walls, foods, golds)
-    direction = get_next_position(game_name, destination, snakes, walls)
+    direction = get_next_position(size, destination, snakes, walls)
     # game.games[game_name].set_last_direction(direction)
 
     return {
@@ -117,7 +117,7 @@ def get_destination(snakes, walls, foods, golds):
     return None
 
 
-def get_next_position(game_name, destination, snakes, walls):
+def get_next_position(size, destination, snakes, walls):
     """
     Given a destination coordinate, and all snakes and walls on board
     Find the direction (north, east, west, south) to move
@@ -155,7 +155,7 @@ def get_next_position(game_name, destination, snakes, walls):
     # loop through positions and move where we can
     for p in positions:
         new_coord = directions[p]
-        if utils.is_valid(game_name, new_coord, snakes, walls):
+        if utils.is_valid(size, new_coord, snakes, walls):
             print "{} is a valid direction to move".format(p)
             return p
     return NORTH

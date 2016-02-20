@@ -90,13 +90,14 @@ def is_snake(coord, snakes):
                 return True
     return False
 
-def is_valid(game_name, coord, snakes, walls):
+def is_valid(size, coord, snakes, walls):
     """
     Returns true/false if coord is a valid position to move to
     """
-    width, height = game.games[game_name].get_board_size()
     x = coord[0]
     y = coord[1]
+    width = size[0]
+    height = size[0]
 
     if x >= 0 and x < width and y >= 0 and y < height:
         if not is_snake(coord, snakes) and not is_wall(coord, walls):
