@@ -3,6 +3,14 @@ import os
 
 import utils
 
+gaming = False
+NORTH = 'north'
+SOUTH = 'south'
+EAST = 'east'
+WEST = 'west'
+
+LAST_DIRECTION = ''
+
 @bottle.route('/static/<path:path>')
 def static(path):
     return bottle.static_file(path, root='static/')
@@ -27,6 +35,8 @@ def start():
 
     # TODO: Do things with data
 
+    gaming = True
+
     return {
         'taunt': 'battlesnake-python!'
     }
@@ -37,6 +47,8 @@ def move():
     data = bottle.request.json
 
     # TODO: Do things with data
+
+    direction = get_next_direction()
 
     return {
         'move': 'north',
@@ -50,6 +62,8 @@ def end():
 
     # TODO: Do things with data
 
+    gaming = False
+
     return {
         'taunt': 'battlesnake-python!'
     }
@@ -59,3 +73,15 @@ def end():
 application = bottle.default_app()
 if __name__ == '__main__':
     bottle.run(application, host=os.getenv('IP', '0.0.0.0'), port=os.getenv('PORT', '8080'))
+
+
+def get_next_direction():
+    direction = 'north'
+    LAST_DIRECTION = direction
+    return direction
+
+def possible_positions():
+    """
+    Returns up to three directions
+    """
+    return NORTH

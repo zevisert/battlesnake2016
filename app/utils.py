@@ -6,6 +6,12 @@ def find_my_snake(snakes):
         if s.id == SNAKE_ID:
             return s
 
+def is_wall(coor, walls):
+    """
+    returns true/false if coor is a wall
+    """
+    return coor in walls
+
 def closest_food(current_position, food_positions):
     """
     Given the current position, returns the closest food position
