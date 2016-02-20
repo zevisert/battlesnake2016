@@ -20,12 +20,12 @@ def is_wall(coord, walls):
     """
     return coord in walls
 
-def distance(coord, coord):
+def distance(coord1, coord2):
     """
     Returns euclidian distance from coord to coord
     """
-    x_square = (coord[0] - coord[0])**2
-    y_square = (coord[1] - coord[1])**2
+    x_square = (coord1[0] - coord2[0])**2
+    y_square = (coord1[1] - coord2[1])**2
     return sqrt(x_square + y_square)
 
 def closest_gold(snake, golds):
