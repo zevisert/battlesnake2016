@@ -15,10 +15,10 @@ def get_taunt():
     Randomly select a taunt from the list
     """
     taunts = [
-        "AAA",
-        "BBB",
-        "CCC",
-        "DDD"
+        "Are these sanitized?",
+        "Get rid of that thing when you have that",
+        "Does this work in Python 2.7?",
+        "My head hurts..."
     ]
     return taunts[randint(0, len(taunts) - 1)]
 
