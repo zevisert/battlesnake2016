@@ -6,15 +6,64 @@ def find_my_snake(snakes):
         if s.id == SNAKE_ID:
             return s
 
+def get_snake_head(snake):
+    """
+    Returns position of snake head
+    """
+    return snake.coords[0]
+
 def is_wall(coor, walls):
     """
     returns true/false if coor is a wall
     """
     return coor in walls
 
-def closest_food(current_position, food_positions):
+def distance(coor1, coor2):
+    """
+    Returns euclidian distance from coor1 to coor2
+    """
+    x_square = (coor1[0] - coor2[0])**2
+    y_square = (coor1[1] - coor2[1])**2
+    return sqrt(x_square + y_square)
+
+def closest_gold(snake, golds):
+    """
+    Returns closest gold position to snake
+    """
+    head = get_snake_head(snake)
+    min_gold = None
+    min_distance = float("inf")
+    for g in golds:
+        d = distance(head, g)
+        if d < min_distance:
+            min_distance = d
+            min_gold = g
+    return min_gold
+
+def closest_food(snake, foods):
     """
     Given the current position, returns the closest food position
     """
-    return food_positions[0]
+    head = get_snake_head(snake)
+    min_food = None
+    min_distance = float("inf")
+    for f in foods:
+        d = distance(head, f)
+        if d < min_distance:
+            min_distance = d
+            min_food = f
+    return min_food
 
+# boolean result if a specified cell is a snake body
+def is_snake(coord, snakes):
+    for s in snakes:
+        for body in s.coords:
+            if coord == body:
+                return True
+    return False
+
+def is_snake_head(coord, snakes):
+    for s in snakes:
+        if s.coords[0] == coord:
+            return True
+    return False
