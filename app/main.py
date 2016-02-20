@@ -52,6 +52,7 @@ def start():
 @bottle.post('/move')
 def move():
     """
+    Find the game we're playing and calculate the move to make
     """
     data = bottle.request.json
     game_name = data.get('game')
