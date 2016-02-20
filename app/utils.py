@@ -11,13 +11,16 @@ WEST = 'west'
 EAST = 'east'
 
 def get_taunt():
+    """
+    Randomly select a taunt from the list
+    """
     taunts = [
         "AAA",
         "BBB",
         "CCC",
         "DDD"
     ]
-    return taunts[randint(0, taunts.len())]
+    return taunts[randint(0, len(taunts) - 1)]
 
 
 def find_my_snake(snakes):
