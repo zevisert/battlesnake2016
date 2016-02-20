@@ -102,16 +102,21 @@ def get_destination(snakes, walls, foods, golds):
     Calculates the next direction the snake should go given data
     """
     my_snake = utils.find_my_snake(snakes)
-    if utils.need_food(snakes):
-        close_food = utils.closest_food(my_snake, foods)
-        print "going for food at {}".format(close_food)
-        return close_food
+
+    close_gold = utils.closest_gold(my_snake, golds)
+    if close_gold:
+        print "going for gold at {}".format(close_gold)
+        return close_gold
     else:
-        print golds
-        close_gold = utils.closest_gold(my_snake, golds)
-        if close_gold:
-            print "going for gold at {}".format(close_gold)
-            return close_gold
+        if utils.need_food(snakes):
+            close_food = utils.closest_food(my_snake, foods)
+            print "going for food at {}".format(close_food)
+            return close_food
+        else:
+            attack_head = utils.get_attack_head(snakes)
+            if attack_head:
+                print "going for enenmy at {}".format(attack_head)
+                return attack_head
     return None
 
 
@@ -135,8 +140,8 @@ def get_next_position(size, destination, snakes, walls):
     directions = {}
     directions[EAST] = [head[0] + 1, head[1]]
     directions[WEST] = [head[0] - 1, head[1]]
-    directions[NORTH] = [head[0], head[1] + 1]
-    directions[SOUTH] = [head[0], head[1] - 1]
+    directions[NORTH] = [head[0], head[1] - 1]
+    directions[SOUTH] = [head[0], head[1] + 1]
 
     # remove last direction from positions and place at front of list
     # if last_direction in positions:
