@@ -3,6 +3,8 @@ import os
 
 import utils
 
+gaming = False
+
 @bottle.route('/static/<path:path>')
 def static(path):
     return bottle.static_file(path, root='static/')
@@ -27,6 +29,8 @@ def start():
 
     # TODO: Do things with data
 
+    gaming = True
+
     return {
         'taunt': 'battlesnake-python!'
     }
@@ -49,6 +53,8 @@ def end():
     data = bottle.request.json
 
     # TODO: Do things with data
+
+    gaming = False
 
     return {
         'taunt': 'battlesnake-python!'
