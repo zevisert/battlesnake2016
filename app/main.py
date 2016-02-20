@@ -57,8 +57,8 @@ def move():
 
     walls = data.get('walls', [])
     snakes = data.get('snakes', [])
-    foods = data.get('foods', [])
-    golds = data.get('golds', [])
+    foods = data.get('food', [])
+    golds = data.get('gold', [])
 
     # TODO: Do things with data
     snake = utils.find_my_snake(snakes)
