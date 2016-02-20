@@ -7,7 +7,7 @@ HEIGHT = 0
 # returns our snake from list of snakes
 def find_my_snake(snakes):
     for s in snakes:
-        if s.id == SNAKE_ID:
+        if s.get('id') == SNAKE_ID:
             return s
 
 def get_snake_head(snake):
