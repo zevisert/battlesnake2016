@@ -116,7 +116,7 @@ def possible_positions(walls, snakes, head):
     directions[SOUTH] = [head[0], head[1] - 1]
 
     for direction, pos in directions.items():
-        if utils.is_wall(pos, walls) or utils.is_snake(pos, snakes):
+        if not utils.is_valid(pos, snakes, walls):
             continue
         possibilities.append(direction)
     return possibilities
