@@ -14,7 +14,7 @@ def get_snake_head(snake):
     """
     Returns position of snake head
     """
-    return snake.coords[0]
+    return snake.get('coords')[0]
 
 def is_wall(coord, walls):
     """
