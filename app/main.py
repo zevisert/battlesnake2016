@@ -74,7 +74,7 @@ def move():
 
     return {
         'move': direction,
-        'taunt': 'battlesnake-python!'
+        'taunt': utils.get_taunt()
     }
 
 
