@@ -4,7 +4,7 @@ from random import randint
 import game
 
 SNAKE_ID = 'ae68ef2a-2fc7-47a0-8b6b-cc7ae5b80d66'
-FOOD_THRESH = 50
+FOOD_THRESH = 30
 NORTH = 'north'
 SOUTH = 'south'
 WEST = 'west'
