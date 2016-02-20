@@ -69,7 +69,7 @@ def move():
     print(possible_pos)
 
     direction = get_next_direction(possible_pos, destination=utils.closest_food(snake, data.get('food')))
-    games[game_name].set_last_direction('direction')
+    game.games[game_name].set_last_direction('direction')
 
     return {
         'move': direction,
