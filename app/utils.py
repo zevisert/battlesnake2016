@@ -1,6 +1,8 @@
 from math import sqrt
 
 SNAKE_ID = 'ae68ef2a-2fc7-47a0-8b6b-cc7ae5b80d66'
+WIDTH = 0
+HEIGHT = 0
 
 # returns our snake from list of snakes
 def find_my_snake(snakes):
@@ -73,7 +75,7 @@ def is_valid(coord, snakes, walls):
     """
     x = coord[0]
     y = coord[1]
-    if x >= 0 and x < Width and y >= 0 and y < Height:
+    if x >= 0 and x < WIDTH and y >= 0 and y < HEIGHT:
         if not is_snake(coord, snakes) and not is_wall(coord, walls):
             return True
     return False

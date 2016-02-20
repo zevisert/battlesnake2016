@@ -8,6 +8,8 @@ NORTH = 'north'
 SOUTH = 'south'
 EAST = 'east'
 WEST = 'west'
+WIDTH = 0
+HEIGHT = 0
 
 LAST_DIRECTION = 'NORTH'
 
@@ -45,7 +47,8 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
-    print(data)
+    utils.HEIGHT = HEIGHT = data['height']
+    utils.WIDTH = WIDTH = data['width']
 
     # TODO: Do things with data
     snakes = data.get('snakes', [])
