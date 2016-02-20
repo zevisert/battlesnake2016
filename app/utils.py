@@ -5,6 +5,7 @@ import game
 
 SNAKE_ID = 'ae68ef2a-2fc7-47a0-8b6b-cc7ae5b80d66'
 FOOD_THRESH = 30
+ATTACK_THRESH = 2
 NORTH = 'north'
 SOUTH = 'south'
 WEST = 'west'
@@ -79,6 +80,28 @@ def closest_food(snake, foods):
             min_food = f
     return min_food
 
+def get_attack_head(snakes):
+    """
+    Gives snakes
+    returns coords of head of snake we can kill
+    """
+    my_snake = get_snake_head()
+    my_length = get_snake_length(my_snake)
+    my_head = get_snake_head(my_snake)
+    min_distance = float("inf")
+    attack_snake = None
+    for s in snakes:
+        if s is not my_snake:
+            length = get_snake_length(s)
+            if my_length > length + ATTACK_THRESH:
+                enemy_head = get_snake_head(s)
+                d = distance(my_head, enemy_head)
+                if d < min_distance:
+                    min_distance = d
+                    attack_snake = enemy_head
+    return attack_snake
+
+
 def is_snake(coord, snakes):
     """
     Given a specific coordinate,
@@ -141,7 +164,7 @@ def need_food(snakes):
     """
     my_snake = find_my_snake(snakes)
     my_snake_length = get_snake_length(my_snake)
-    if my_snake.get("health") < FOOD_THRESH or my_snake_length < (average_snake_length(snakes) + 1):
+    if my_snake.get("health") < FOOD_THRESH or my_snake_length < (average_snake_length(snakes) + 2):
         return True
     return False
 
