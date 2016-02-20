@@ -63,7 +63,7 @@ def move():
     # TODO: Do things with data
     snake = utils.find_my_snake(snakes)
     snake_head = utils.get_snake_head(snake)
-    
+
     # possible_pos = possible_positions(walls=walls, snakes=snakes, head=snake_head)
 
     # print(possible_pos)
@@ -105,7 +105,14 @@ def get_destination(snakes, walls, foods, golds):
     my_snake = utils.find_my_snake(snakes)
     if utils.need_food(snakes):
         close_food = utils.closest_food(my_snake, foods)
+        print "going for food at {}".format(close_food)
         return close_food
+    else:
+        print golds
+        close_gold = utils.closest_gold(my_snake, golds)
+        if close_gold:
+            print "going for gold at {}".format(close_gold)
+            return close_gold
     return None
 
 
@@ -142,10 +149,13 @@ def get_next_position(game_name, destination, snakes, walls, last_direction):
         positions.remove(direction_to_move)
         positions = [direction_to_move] + positions
 
+    print positions
+
     # loop through positions and move where we can
     for p in positions:
         new_coord = directions[p]
         if utils.is_valid(game_name, new_coord, snakes, walls):
+            print "{} is a valid direction to move".format(p)
             return p
     return last_direction
 
