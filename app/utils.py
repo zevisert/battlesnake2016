@@ -14,18 +14,18 @@ def get_snake_head(snake):
     """
     return snake.coords[0]
 
-def is_wall(coor, walls):
+def is_wall(coord, walls):
     """
-    returns true/false if coor is a wall
+    returns true/false if coord is a wall
     """
-    return coor in walls
+    return coord in walls
 
-def distance(coor1, coor2):
+def distance(coord, coord):
     """
-    Returns euclidian distance from coor1 to coor2
+    Returns euclidian distance from coord to coord
     """
-    x_square = (coor1[0] - coor2[0])**2
-    y_square = (coor1[1] - coor2[1])**2
+    x_square = (coord[0] - coord[0])**2
+    y_square = (coord[1] - coord[1])**2
     return sqrt(x_square + y_square)
 
 def closest_gold(snake, golds):
@@ -65,6 +65,17 @@ def is_snake(coord, snakes):
         for body in s.coords:
             if coord == body:
                 return True
+    return False
+
+def is_valid(coord, snakes, walls):
+    """
+    Returns true/false if coord is a valid position to move to
+    """
+    x = coord[0]
+    y = coord[1]
+    if x >= 0 and x < Width and y >= 0 and y < Height:
+        if not is_snake(coord, snakes) and not is_wall(coord, walls):
+            return True
     return False
 
 def is_snake_head(coord, snakes):
