@@ -49,7 +49,7 @@ def move():
     # TODO: Do things with data
     snake = utils.find_my_snake(data.snakes)
     snake_head = utils.get_snake_head(snake)
-    possible_pos = possible_positions(walls=data.walls, snake=data.snakes, head=snake[0])
+    possible_pos = possible_positions(walls=data.walls, snakes=data.snakes, head=snake[0])
     direction = get_next_direction(possible_pos)
     LAST_DIRECTION = direction
 
@@ -86,7 +86,7 @@ def get_next_direction(possible_pos):
         return SOUTH # change this
 
 
-def possible_positions(walls, snake, head):
+def possible_positions(walls, snakes, head):
     """
     Returns up to three directions
     """
