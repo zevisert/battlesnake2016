@@ -57,7 +57,7 @@ def move():
     snakes = data.get('snakes', [])
     snake = utils.find_my_snake(data.get('snakes', []))
     snake_head = utils.get_snake_head(snake)
-    possible_pos = possible_positions(walls=data.get('walls'), snakes=snakes, head=snake_head)
+    possible_pos = possible_positions(walls=data.get('walls', []), snakes=snakes, head=snake_head)
     direction = get_next_direction(possible_pos, destination=utils.closest_food(snake, data.get('food')))
     LAST_DIRECTION = direction
 
