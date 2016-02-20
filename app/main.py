@@ -59,17 +59,20 @@ def move():
     utils.HEIGHT = HEIGHT = data['height']
     utils.WIDTH = WIDTH = data['width']
 
-    walls = data.get('walls')
+    walls = data.get('walls', [])
     snakes = data.get('snakes', [])
+    foods = data.get('foods', [])
+    golds = data.get('golds', [])
 
     # TODO: Do things with data
     snake = utils.find_my_snake(snakes)
     snake_head = utils.get_snake_head(snake)
-    possible_pos = possible_positions(walls=data.get('walls', []), snakes=snakes, head=snake_head)
+    possible_pos = possible_positions(walls=walls, snakes=snakes, head=snake_head)
 
     print(possible_pos)
 
-    direction = get_next_direction(possible_pos, destination=utils.closest_food(snake, data.get('food')))
+    destination = get_destination(snakes, walls, foods, golds)
+    direction = get_next_position(destination, snakes, walls)
     LAST_DIRECTION = direction
 
     return {
@@ -95,6 +98,52 @@ def end():
 application = bottle.default_app()
 if __name__ == '__main__':
     bottle.run(application, host=os.getenv('IP', '0.0.0.0'), port=os.getenv('PORT', '8080'))
+
+def get_destination(snakes, walls, foods, golds):
+    """
+    Calculates the next direction the snake should go given data
+    """
+    my_snake = utils.find_my_snake(snakes)
+    if utils.need_food(snakes):
+        close_food = utils.closest_food(my_snake, foods)
+
+def get_next_position(destination, snakes, walls):
+    """
+    Given a destination coordinate, and all snakes and walls on board
+    Find the direction (north, east, west, south) to move
+    Prioritizes moving in the same direction as last
+    Will not move into wall or off board
+    """
+    positions = [NORTH, EAST, SOUTH, WEST]
+
+    my_snake = utils.find_my_snake(snakes)
+    head = utils.get_snake_head(my_snake)
+
+    # Find what direction we want to move in
+    direction_to_move = utils.direction_to_move(head, destination)
+
+    directions = {}
+    directions[EAST] = [head[0] + 1, head[1]]
+    directions[WEST] = [head[0] - 1, head[1]]
+    directions[NORTH] = [head[0], head[1] + 1]
+    directions[SOUTH] = [head[0], head[1] - 1]
+
+    # remove last direction from positions and place at front of list
+    if LAST_DIRECTION in positions:
+        positions.remove(LAST_DIRECTION)
+        positions = [LAST_DIRECTION] + positions
+
+    # remove destination from positions and place at front of list
+    if direction_to_move in positions:
+        positions.remove(direction_to_move)
+        positions = [direction_to_move] + positions
+
+    # loop through positions and move where we can
+    for p in positions:
+        new_coord = directions[p]
+        if utils.is_valid(new_coord, snakes, walls):
+            return p
+    return LAST_DIRECTION
 
 
 def get_next_direction(possible_pos, **kwargs):
