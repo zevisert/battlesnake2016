@@ -69,7 +69,7 @@ def move():
     # print(possible_pos)
 
     destination = get_destination(snakes, walls, foods, golds)
-    direction = get_next_position(game_name, destination, snakes, walls, game.games[game_name].get_last_direction())
+    direction = get_next_position(game_name, destination, snakes, walls)
     game.games[game_name].set_last_direction(direction)
 
     return {
