@@ -10,6 +10,7 @@ SOUTH = 'south'
 EAST = 'east'
 WEST = 'west'
 
+
 @bottle.route('/static/<path:path>')
 def static(path):
     return bottle.static_file(path, root='static/')
@@ -94,6 +95,7 @@ application = bottle.default_app()
 if __name__ == '__main__':
     bottle.run(application, host=os.getenv('IP', '0.0.0.0'), port=os.getenv('PORT', '8080'))
 
+
 def get_destination(snakes, walls, foods, golds):
     """
     Calculates the next direction the snake should go given data
@@ -104,8 +106,8 @@ def get_destination(snakes, walls, foods, golds):
         return close_food
     return None
 
+
 def get_next_position(game_name, destination, snakes, walls, last_direction):
-def get_next_position(destination, snakes, walls, last_direction):
     """
     Given a destination coordinate, and all snakes and walls on board
     Find the direction (north, east, west, south) to move
@@ -155,7 +157,7 @@ def get_next_direction(possible_pos, **kwargs):
     if direction in possible_pos:
         return direction
     else:
-        return possible_pos[0] # change this
+        return possible_pos[0]  # change this
 
 
 def possible_positions(walls, snakes, head):

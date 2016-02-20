@@ -1,7 +1,7 @@
 games = {}
 
-class Game(object):
 
+class Game(object):
     def __init__(self, game_name, width, height, mode='advanced'):
         self.game_name = game_name
         self.width = width
