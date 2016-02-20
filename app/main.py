@@ -105,6 +105,8 @@ def get_destination(snakes, walls, foods, golds):
     my_snake = utils.find_my_snake(snakes)
     if utils.need_food(snakes):
         close_food = utils.closest_food(my_snake, foods)
+        return close_food
+    return None
 
 def get_next_position(destination, snakes, walls):
     """
@@ -119,7 +121,9 @@ def get_next_position(destination, snakes, walls):
     head = utils.get_snake_head(my_snake)
 
     # Find what direction we want to move in
-    direction_to_move = utils.direction_to_move(head, destination)
+    direction_to_move = None
+    if destination is not None:
+        direction_to_move = utils.direction_to_move(head, destination)
 
     directions = {}
     directions[EAST] = [head[0] + 1, head[1]]
@@ -133,7 +137,7 @@ def get_next_position(destination, snakes, walls):
         positions = [LAST_DIRECTION] + positions
 
     # remove destination from positions and place at front of list
-    if direction_to_move in positions:
+    if destination is not None and direction_to_move in positions:
         positions.remove(direction_to_move)
         positions = [direction_to_move] + positions
 
