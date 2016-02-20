@@ -4,10 +4,12 @@ SNAKE_ID = 'ae68ef2a-2fc7-47a0-8b6b-cc7ae5b80d66'
 WIDTH = 0
 HEIGHT = 0
 
-# returns our snake from list of snakes
 def find_my_snake(snakes):
+    """
+    Returns our snake from the snakes on the board
+    """
     for s in snakes:
-        if s.id == SNAKE_ID:
+        if s.get('id') == SNAKE_ID:
             return s
 
 def get_snake_head(snake):
@@ -64,7 +66,7 @@ def is_snake(coord, snakes):
     return if that cell is occupied by a snake's body (head inclusive)
     """
     for s in snakes:
-        for body in s.coords:
+        for body in s.get('coords'):
             if coord == body:
                 return True
     return False
@@ -86,6 +88,6 @@ def is_snake_head(coord, snakes):
     return if that cell is occupied by a snake's head
     """
     for s in snakes:
-        if s.coords[0] == coord:
+        if s.get('coords')[0] == coord:
             return True
     return False
