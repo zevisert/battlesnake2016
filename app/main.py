@@ -160,19 +160,19 @@ def get_next_direction(possible_pos, **kwargs):
         return possible_pos[0]  # change this
 
 
-def possible_positions(walls, snakes, head):
-    """
-    Returns up to three directions
-    """
-    possibilities = []
-    directions = {}
-    directions[EAST] = [head[0] + 1, head[1]]
-    directions[WEST] = [head[0] - 1, head[1]]
-    directions[NORTH] = [head[0], head[1] - 1]
-    directions[SOUTH] = [head[0], head[1] + 1]
+# def possible_positions(walls, snakes, head):
+#     """
+#     Returns up to three directions
+#     """
+#     possibilities = []
+#     directions = {}
+#     directions[EAST] = [head[0] + 1, head[1]]
+#     directions[WEST] = [head[0] - 1, head[1]]
+#     directions[NORTH] = [head[0], head[1] - 1]
+#     directions[SOUTH] = [head[0], head[1] + 1]
 
-    for direction, pos in directions.items():
-        if not utils.is_valid(pos, snakes, walls):
-            continue
-        possibilities.append(direction)
-    return possibilities
+#     for direction, pos in directions.items():
+#         if not utils.is_valid(pos, snakes, walls):
+#             continue
+#         possibilities.append(direction)
+#     return possibilities
