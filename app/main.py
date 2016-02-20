@@ -10,8 +10,6 @@ SOUTH = 'south'
 EAST = 'east'
 WEST = 'west'
 
-LAST_DIRECTION = 'NORTH'
-
 @bottle.route('/static/<path:path>')
 def static(path):
     return bottle.static_file(path, root='static/')
@@ -50,6 +48,7 @@ def start():
 @bottle.post('/move')
 def move():
     """
+    Find the game we're playing and calculate the move to make
     """
     data = bottle.request.json
     game_name = data.get('game')
@@ -67,7 +66,7 @@ def move():
     print(possible_pos)
 
     destination = get_destination(snakes, walls, foods, golds)
-    direction = get_next_position(game_name, destination, snakes, walls)
+    direction = get_next_position(game_name, destination, snakes, walls, game.games[game_name].get_last_direction())
     game.games[game_name].set_last_direction(direction)
 
     return {
@@ -102,8 +101,11 @@ def get_destination(snakes, walls, foods, golds):
     my_snake = utils.find_my_snake(snakes)
     if utils.need_food(snakes):
         close_food = utils.closest_food(my_snake, foods)
+        return close_food
+    return None
 
-def get_next_position(game_name, destination, snakes, walls):
+def get_next_position(game_name, destination, snakes, walls, last_direction):
+def get_next_position(destination, snakes, walls, last_direction):
     """
     Given a destination coordinate, and all snakes and walls on board
     Find the direction (north, east, west, south) to move
@@ -116,7 +118,9 @@ def get_next_position(game_name, destination, snakes, walls):
     head = utils.get_snake_head(my_snake)
 
     # Find what direction we want to move in
-    direction_to_move = utils.direction_to_move(head, destination)
+    direction_to_move = None
+    if destination is not None:
+        direction_to_move = utils.direction_to_move(head, destination)
 
     directions = {}
     directions[EAST] = [head[0] + 1, head[1]]
@@ -125,12 +129,12 @@ def get_next_position(game_name, destination, snakes, walls):
     directions[SOUTH] = [head[0], head[1] - 1]
 
     # remove last direction from positions and place at front of list
-    if LAST_DIRECTION in positions:
-        positions.remove(LAST_DIRECTION)
-        positions = [LAST_DIRECTION] + positions
+    if last_direction in positions:
+        positions.remove(last_direction)
+        positions = [last_direction] + positions
 
     # remove destination from positions and place at front of list
-    if direction_to_move in positions:
+    if destination is not None and direction_to_move in positions:
         positions.remove(direction_to_move)
         positions = [direction_to_move] + positions
 
