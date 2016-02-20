@@ -147,7 +147,6 @@ def get_next_position(size, destination, snakes, walls):
     if destination is not None and direction_to_move in positions:
         positions.remove(direction_to_move)
         positions = [direction_to_move] + positions
-
     print positions
 
     # loop through positions and move where we can
