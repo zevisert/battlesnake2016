@@ -62,9 +62,10 @@ def move():
     # TODO: Do things with data
     snake = utils.find_my_snake(snakes)
     snake_head = utils.get_snake_head(snake)
-    possible_pos = possible_positions(walls=walls, snakes=snakes, head=snake_head)
+    
+    # possible_pos = possible_positions(walls=walls, snakes=snakes, head=snake_head)
 
-    print(possible_pos)
+    # print(possible_pos)
 
     destination = get_destination(snakes, walls, foods, golds)
     direction = get_next_position(game_name, destination, snakes, walls, game.games[game_name].get_last_direction())
@@ -149,19 +150,7 @@ def get_next_position(game_name, destination, snakes, walls, last_direction):
         new_coord = directions[p]
         if utils.is_valid(game_name, new_coord, snakes, walls):
             return p
-    return LAST_DIRECTION
-
-
-def get_next_direction(possible_pos, **kwargs):
-    """
-    Given a destination coordinate and possible directions, determine which direction the snake should end up moving
-    """
-    destination = kwargs.pop('destination', None)
-    direction = LAST_DIRECTION
-    if direction in possible_pos:
-        return direction
-    else:
-        return possible_pos[0]  # change this
+    return last_direction
 
 
 # def possible_positions(walls, snakes, head):
