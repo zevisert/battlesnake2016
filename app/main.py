@@ -45,6 +45,7 @@ def start():
 @bottle.post('/move')
 def move():
     data = bottle.request.json
+    print(data)
 
     # TODO: Do things with data
     snake = utils.find_my_snake(data.snakes)
