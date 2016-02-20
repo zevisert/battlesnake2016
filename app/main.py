@@ -9,8 +9,6 @@ NORTH = 'north'
 SOUTH = 'south'
 EAST = 'east'
 WEST = 'west'
-WIDTH = 0
-HEIGHT = 0
 
 LAST_DIRECTION = 'NORTH'
 
@@ -55,8 +53,6 @@ def move():
     """
     data = bottle.request.json
     game_name = data.get('game')
-    utils.HEIGHT = HEIGHT = data['height']
-    utils.WIDTH = WIDTH = data['width']
 
     walls = data.get('walls', [])
     snakes = data.get('snakes', [])
@@ -71,8 +67,8 @@ def move():
     print(possible_pos)
 
     destination = get_destination(snakes, walls, foods, golds)
-    direction = get_next_position(destination, snakes, walls)
-    game.games[game_name].set_last_direction('direction')
+    direction = get_next_position(game_name, destination, snakes, walls)
+    game.games[game_name].set_last_direction(direction)
 
     return {
         'move': direction,
@@ -87,6 +83,7 @@ def end():
     # TODO: Do things with data
 
     gaming = False
+    game.games.pop(data.get('game'))
 
     return {
         'taunt': 'battlesnake-python!'
@@ -106,7 +103,7 @@ def get_destination(snakes, walls, foods, golds):
     if utils.need_food(snakes):
         close_food = utils.closest_food(my_snake, foods)
 
-def get_next_position(destination, snakes, walls):
+def get_next_position(game_name, destination, snakes, walls):
     """
     Given a destination coordinate, and all snakes and walls on board
     Find the direction (north, east, west, south) to move
@@ -140,7 +137,7 @@ def get_next_position(destination, snakes, walls):
     # loop through positions and move where we can
     for p in positions:
         new_coord = directions[p]
-        if utils.is_valid(new_coord, snakes, walls):
+        if utils.is_valid(game_name, new_coord, snakes, walls):
             return p
     return LAST_DIRECTION
 

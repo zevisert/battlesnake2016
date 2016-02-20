@@ -1,9 +1,9 @@
 from math import sqrt
 from random import randint
 
+import game
+
 SNAKE_ID = 'ae68ef2a-2fc7-47a0-8b6b-cc7ae5b80d66'
-WIDTH = 0
-HEIGHT = 0
 FOOD_THRESH = 50
 NORTH = 'north'
 SOUTH = 'south'
@@ -90,13 +90,15 @@ def is_snake(coord, snakes):
                 return True
     return False
 
-def is_valid(coord, snakes, walls):
+def is_valid(game_name, coord, snakes, walls):
     """
     Returns true/false if coord is a valid position to move to
     """
+    width, height = game.games[game_name].get_board_size()
     x = coord[0]
     y = coord[1]
-    if x >= 0 and x < WIDTH and y >= 0 and y < HEIGHT:
+
+    if x >= 0 and x < width and y >= 0 and y < height:
         if not is_snake(coord, snakes) and not is_wall(coord, walls):
             return True
     return False
