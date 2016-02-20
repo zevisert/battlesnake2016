@@ -1,4 +1,5 @@
 from math import sqrt
+from random import randint
 
 SNAKE_ID = 'ae68ef2a-2fc7-47a0-8b6b-cc7ae5b80d66'
 WIDTH = 0
@@ -8,6 +9,16 @@ NORTH = 'north'
 SOUTH = 'south'
 WEST = 'west'
 EAST = 'east'
+
+def get_taunt():
+    taunts = [
+        "AAA",
+        "BBB",
+        "CCC",
+        "DDD"
+    ]
+    return taunts[randint(0, taunts.len())]
+
 
 def find_my_snake(snakes):
     """
