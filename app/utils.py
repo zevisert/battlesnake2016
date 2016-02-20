@@ -75,7 +75,7 @@ def is_valid(coord, snakes, walls):
     """
     x = coord[0]
     y = coord[1]
-    if x >= 0 and x < Width and y >= 0 and y < Height:
+    if x >= 0 and x < WIDTH and y >= 0 and y < HEIGHT:
         if not is_snake(coord, snakes) and not is_wall(coord, walls):
             return True
     return False
