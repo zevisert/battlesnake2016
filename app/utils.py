@@ -25,3 +25,9 @@ def is_snake(coord, snakes):
             if coord == body:
                 return True
     return False
+
+def is_snake_head(coord, snakes):
+    for s in snakes:
+        if s.coords[0] == coord:
+            return True
+    return False
