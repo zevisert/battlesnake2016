@@ -1,5 +1,6 @@
-import bottle
 import os
+
+import bottle
 
 import utils
 
@@ -46,6 +47,8 @@ def start():
 
 @bottle.post('/move')
 def move():
+    """
+    """
     data = bottle.request.json
     utils.HEIGHT = HEIGHT = data['height']
     utils.WIDTH = WIDTH = data['width']
@@ -55,7 +58,7 @@ def move():
     snake = utils.find_my_snake(data.get('snakes', []))
     snake_head = utils.get_snake_head(snake)
     possible_pos = possible_positions(walls=data.get('walls'), snakes=snakes, head=snake_head)
-    direction = get_next_direction(possible_pos)
+    direction = get_next_direction(possible_pos, destination=utils.closest_food(snake, data.get('food')))
     LAST_DIRECTION = direction
 
     return {
@@ -83,12 +86,16 @@ if __name__ == '__main__':
     bottle.run(application, host=os.getenv('IP', '0.0.0.0'), port=os.getenv('PORT', '8080'))
 
 
-def get_next_direction(possible_pos):
+def get_next_direction(possible_pos, **kwargs):
+    """
+    Given a destination coordinate and possible directions, determine which direction the snake should end up moving
+    """
+    destination = kwargs.pop('destination', None)
     direction = LAST_DIRECTION
     if direction in possible_pos:
         return direction
     else:
-        return SOUTH # change this
+        return possible_pos[0] # change this
 
 
 def possible_positions(walls, snakes, head):
@@ -97,10 +104,10 @@ def possible_positions(walls, snakes, head):
     """
     possibilities = []
     directions = {}
-    directions[EAST] = [head[0]+1, head[1]]
-    directions[WEST] = [head[0]-1, head[1]]
-    directions[NORTH] = [head[0], head[1]+1]
-    directions[SOUTH] = [head[0], head[1]-1]
+    directions[EAST] = [head[0] + 1, head[1]]
+    directions[WEST] = [head[0] - 1, head[1]]
+    directions[NORTH] = [head[0], head[1] + 1]
+    directions[SOUTH] = [head[0], head[1] - 1]
 
     for direction, pos in directions.items():
         if utils.is_wall(pos, walls) or utils.is_snake(pos, snakes):
