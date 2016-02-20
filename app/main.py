@@ -48,11 +48,13 @@ def move():
 
     # TODO: Do things with data
     snake = utils.find_my_snake(data.snakes)
-    possible_pos = possible_positions(walls=data.walls, head=snake[0])
+    snake_head = utils.get_snake_head(snake)
+    possible_pos = possible_positions(walls=data.walls, snake=data.snakes, head=snake[0])
     direction = get_next_direction(possible_pos)
+    LAST_DIRECTION = direction
 
     return {
-        'move': 'north',
+        'move': direction,
         'taunt': 'battlesnake-python!'
     }
 
@@ -81,11 +83,10 @@ def get_next_direction(possible_pos):
     if direction in possible_pos:
         return direction
     else:
-        LAST_DIRECTION = SOUTH
         return SOUTH # change this
 
 
-def possible_positions(walls, head):
+def possible_positions(walls, snake, head):
     """
     Returns up to three directions
     """
@@ -97,7 +98,7 @@ def possible_positions(walls, head):
     directions[SOUTH] = [head[0], head[1]-1]
 
     for direction, pos in directions.items():
-        if utils.is_wall(pos, walls):
+        if utils.is_wall(pos, walls) or utils.is_snake(pos, snakes):
             continue
         possibilities.append(direction)
     return possibilities
