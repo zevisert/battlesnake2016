@@ -3,7 +3,7 @@ import os
 import bottle
 
 import utils
-from game import Game
+import game
 
 NORTH = 'north'
 SOUTH = 'south'
@@ -11,8 +11,6 @@ EAST = 'east'
 WEST = 'west'
 WIDTH = 0
 HEIGHT = 0
-
-games = {}
 
 LAST_DIRECTION = 'NORTH'
 
@@ -41,8 +39,8 @@ def start():
     mode = data.get('mode')
     height = data.get('height')
     width = data.get('width')
-    game = Game(game_name=game_name, width=width, height=height, mode=mode)
-    games[game_name] = game
+    current_game = game.Game(game_name=game_name, width=width, height=height, mode=mode)
+    game.games[game_name] = current_game
 
     # TODO: Do things with data
 
@@ -56,6 +54,7 @@ def move():
     """
     """
     data = bottle.request.json
+    game_name = data.get('game')
     utils.HEIGHT = HEIGHT = data['height']
     utils.WIDTH = WIDTH = data['width']
 
@@ -70,7 +69,7 @@ def move():
     print(possible_pos)
 
     direction = get_next_direction(possible_pos, destination=utils.closest_food(snake, data.get('food')))
-    LAST_DIRECTION = direction
+    games[game_name].set_last_direction('direction')
 
     return {
         'move': direction,

@@ -1,3 +1,5 @@
+games = {}
+
 class Game(object):
 
     def __init__(self, game_name, width, height, mode='advanced'):
