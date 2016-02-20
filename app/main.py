@@ -135,8 +135,8 @@ def get_next_position(size, destination, snakes, walls):
     directions = {}
     directions[EAST] = [head[0] + 1, head[1]]
     directions[WEST] = [head[0] - 1, head[1]]
-    directions[NORTH] = [head[0], head[1] + 1]
-    directions[SOUTH] = [head[0], head[1] - 1]
+    directions[NORTH] = [head[0], head[1] - 1]
+    directions[SOUTH] = [head[0], head[1] + 1]
 
     # remove last direction from positions and place at front of list
     # if last_direction in positions:
