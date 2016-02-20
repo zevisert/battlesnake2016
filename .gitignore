@@ -1,4 +1,8 @@
 *.DS_Store
 *.pyc
 battlesnake
+<<<<<<< Updated upstream
 .idea/
+=======
+.idea
+>>>>>>> Stashed changes
