@@ -107,6 +107,7 @@ def get_destination(snakes, walls, foods, golds):
         print "going for food at {}".format(close_food)
         return close_food
     else:
+        print golds
         close_gold = utils.closest_gold(my_snake, golds)
         if close_gold:
             print "going for gold at {}".format(close_gold)
