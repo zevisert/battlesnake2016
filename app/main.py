@@ -43,7 +43,7 @@ def start():
     # TODO: Do things with data
 
     return {
-        'taunt': 'battlesnake-python!'
+        'taunt': '*taunt*'
     }
 
 
@@ -87,7 +87,7 @@ def end():
     gaming = False
 
     return {
-        'taunt': 'battlesnake-python!'
+        'taunt': 'we probably won'
     }
 
 
@@ -105,17 +105,17 @@ def get_destination(snakes, walls, foods, golds):
 
     close_gold = utils.closest_gold(my_snake, golds)
     if close_gold:
-        print "going for gold at {}".format(close_gold)
+        # print "going for gold at {}".format(close_gold)
         return close_gold
     else:
         if utils.need_food(snakes):
             close_food = utils.closest_food(my_snake, foods)
-            print "going for food at {}".format(close_food)
+            # print "going for food at {}".format(close_food)
             return close_food
         else:
             attack_head = utils.get_attack_head(snakes)
             if attack_head:
-                print "going for enenmy at {}".format(attack_head)
+                # print "going for enenmy at {}".format(attack_head)
                 return attack_head
     return None
 
@@ -133,9 +133,9 @@ def get_next_position(size, destination, snakes, walls):
     head = utils.get_snake_head(my_snake)
 
     # Find what direction we want to move in
-    direction_to_move = None
+    directions_to_move = []
     if destination is not None:
-        direction_to_move = utils.direction_to_move(head, destination)
+        directions_to_move = utils.direction_to_move(head, destination)
 
     directions = {}
     directions[EAST] = [head[0] + 1, head[1]]
@@ -149,18 +149,20 @@ def get_next_position(size, destination, snakes, walls):
     #     positions = [last_direction] + positions
 
     # remove destination from positions and place at front of list
-    if destination is not None and direction_to_move in positions:
-        positions.remove(direction_to_move)
-        positions = [direction_to_move] + positions
+    if destination and len(directions_to_move) > 0:
+        for dir in directions_to_move:
+            if dir in positions:
+                positions.remove(dir)
+        positions = directions_to_move + positions
     print positions
 
     # loop through positions and move where we can
     for p in positions:
         new_coord = directions[p]
         if utils.is_valid(size, new_coord, snakes, walls):
-            print "{} is a valid direction to move".format(p)
+            # print "{} is a valid direction to move".format(p)
             return p
-    return NORTH
+    return positions[0]
 
 
 # def possible_positions(walls, snakes, head):
