@@ -135,7 +135,7 @@ def get_next_position(size, destination, snakes, walls):
     # Find what direction we want to move in
     direction_to_move = None
     if destination is not None:
-        direction_to_move = utils.direction_to_move(head, destination)
+        directions_to_move = utils.direction_to_move(head, destination)
 
     directions = {}
     directions[EAST] = [head[0] + 1, head[1]]
@@ -149,9 +149,10 @@ def get_next_position(size, destination, snakes, walls):
     #     positions = [last_direction] + positions
 
     # remove destination from positions and place at front of list
-    if destination is not None and direction_to_move in positions:
-        positions.remove(direction_to_move)
-        positions = [direction_to_move] + positions
+    if destination and len(directions_to_move) > 0:
+        for dir in directions_to_move:
+            positions.remove(dir)
+        positions = directions_to_move + positions
     print positions
 
     # loop through positions and move where we can
