@@ -274,6 +274,7 @@ def coord_in_safe_area(coord, walls, snakes, size):
     area_to_dest = len(list(yeild_walls(res)))
 
     if area_to_dest < get_snake_length(find_my_snake(snakes)):
+    	print "I want to get to [" + str(coord[0]) + ", " + str(coord[1]) + "]"
         print "Flood area of " + str(area_to_dest) + " is smaller than my length!"
         return False
     return True
@@ -284,7 +285,7 @@ def floodfill(board_matrix, x, y):
     #recursively invoke flood fill on all surrounding cells:
     """
     matrix = board_matrix
-    if x < 0 or y < 0 or y > len(matrix) - 2 or x > len(matrix[0]) - 2:
+    if x < 0 or y < 0 or y > len(matrix) - 1 or x > len(matrix[0]) - 1:
     	print 'Indicies' + str(x) + ' ' + str(y)
     if matrix[y][x] == 0:
         matrix[y][x] = -1
