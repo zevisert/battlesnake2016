@@ -172,6 +172,8 @@ def is_safe(size, coord, snakes, walls):
     """
     Checks if the coord is safe to move to (i.e. not surrounded)
     """
+    if not coord_in_safe_area(coord, walls, snakes, size):
+    	return False
     x = coord[0]
     y = coord[1]
     surrounding_coords = [
@@ -271,16 +273,10 @@ def coord_in_safe_area(coord, walls, snakes, size):
     res = floodfill(board, coord[0], coord[1])
     area_to_dest = len(list(yeild_walls(res)))
 
-    size_of_board = size[0] * size[1]
-    for snake in snakes:
-        for snake_body in snake.get('coords'):
-            size_of_board -= 1
-
-    for wall in walls:
-        size_of_board -= 1
-
-    if area_to_dest < size_of_board:
-        print "Flood area is smaller than game board"
+    if area_to_dest < get_snake_length(find_my_snake(snakes)):
+        print "Flood area is smaller than my length!"
+        return False
+    return True
 
 
 def floodfill(board_matrix, x, y):
@@ -290,8 +286,6 @@ def floodfill(board_matrix, x, y):
     matrix = board_matrix
     if matrix[y][x] == 0:
         matrix[y][x] = -1
-
-
         if x > 0:
             matrix = floodfill(matrix, x - 1, y)
         if x < len(matrix[y]) - 1:
