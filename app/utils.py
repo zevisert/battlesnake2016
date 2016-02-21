@@ -273,12 +273,12 @@ def coord_in_safe_area(coord, walls, snakes, size):
     size_of_board = size[0] * size[1]
     for snake in snakes:
         for snake_body in snake.get('coords'):
-            size_of_area -= 1
+            size_of_board -= 1
 
     for wall in walls:
-        size_of_area -= 1
+        size_of_board -= 1
 
-    if area_to_dest < size_of_area:
+    if area_to_dest < size_of_board:
         print "Flood area is smaller than game board"
 
 
