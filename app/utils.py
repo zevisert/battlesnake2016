@@ -122,6 +122,9 @@ def is_valid(size, coord, snakes, walls, safety_check=True):
     width = size[0]
     height = size[0]
 
+    # Test create board
+    coord_in_safe_area(coord, walls, snakes, size)
+
     if x >= 0 and x < width and y >= 0 and y < height:
         if not is_snake(coord, snakes) and not is_wall(coord, walls):
             if not safety_check:
@@ -203,3 +206,33 @@ def direction_to_move(my_coord, destination):
         return WEST if x_dist > 0 else EAST
     else:
         return NORTH if y_dist > 0 else SOUTH
+
+
+def coord_in_safe_area(coord, walls, snakes, size):
+    board = [[0 for j in range(0, size[0])] for i in range(0, size[1])]
+    for wall in walls:
+        board[wall[0]][wall[1]] = 1
+    for snake in snakes:
+        for snake_body in snake.get('coords'):
+            board[snake.get('coords')[0]][snake.get('coords')[2]]
+
+    print board
+
+
+def floodfill(board_matrix, x, y):
+    """
+    #recursively invoke flood fill on all surrounding cells:
+    """
+    matrix = board_matrix
+    if matrix[x][y] is 0:
+        matrix[x][y] = 3
+
+        if x > 0:
+            matrix = floodfill(matrix, x - 1, y)
+        if x < len(matrix[y]) - 1:
+            matrix = floodfill(matrix, x + 1, y)
+        if y > 0:
+            matrix = floodfill(matrix, x, y - 1)
+        if y < len(matrix) - 1:
+            matrix = floodfill(matrix, x, y + 1)
+    return matrix
