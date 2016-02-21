@@ -1,5 +1,5 @@
 from math import sqrt
-from random import randint, random
+from random import randint, random, choice
 
 import game
 
