@@ -1,5 +1,5 @@
 from math import sqrt
-from random import randint
+from random import randint, random
 
 import game
 
@@ -11,17 +11,24 @@ SOUTH = 'south'
 WEST = 'west'
 EAST = 'east'
 
+
 def get_taunt():
     """
     Randomly select a taunt from the list
     """
-    taunts = [
-        "Are these sanitized?",
-        "Get rid of that thing when you have that",
-        "Does this work in Python 2.7?",
-        "My head hurts..."
-    ]
-    return taunts[randint(0, len(taunts) - 1)]
+    s_nouns = ["A dude", "My mom", "The king", "Some guy", "A cat with rabies", "A sloth", "Your homie",
+               "This cool guy my gardener met yesterday", "Superman"]
+    p_nouns = ["These dudes", "Both of my moms", "All the kings of the world", "Some guys", "All of a cattery's cats",
+               "The multitude of sloths living under your bed", "Your homies", "Like, these, like, all these people",
+               "Supermen"]
+    s_verbs = ["eats", "kicks", "gives", "treats", "meets with", "creates", "hacks", "configures", "spies on",
+               "retards", "meows on", "flees from", "tries to automate", "explodes"]
+    p_verbs = ["eat", "kick", "give", "treat", "meet with", "create", "hack", "configure", "spy on", "retard",
+               "meow on", "flee from", "try to automate", "explode"]
+    infinitives = ["to make a pie.", "for no apparent reason.", "because the sky is green.", "for a disease.",
+                   "to be able to make toast explode.", "to know more about archeology."]
+
+    return str(random.choice(s_nouns) + random.choice(s_verbs) + random.choice(s_nouns).lower())
 
 
 def find_my_snake(snakes):
@@ -32,11 +39,13 @@ def find_my_snake(snakes):
         if s.get('id') == SNAKE_ID:
             return s
 
+
 def get_snake_head(snake):
     """
     Returns position of snake head
     """
     return snake.get('coords')[0]
+
 
 def is_wall(coord, walls):
     """
@@ -44,13 +53,15 @@ def is_wall(coord, walls):
     """
     return coord in walls
 
+
 def distance(coord1, coord2):
     """
     Returns euclidian distance from coord to coord
     """
-    x_square = (coord1[0] - coord2[0])**2
-    y_square = (coord1[1] - coord2[1])**2
+    x_square = (coord1[0] - coord2[0]) ** 2
+    y_square = (coord1[1] - coord2[1]) ** 2
     return sqrt(x_square + y_square)
+
 
 def closest_gold(snake, golds):
     """
@@ -66,6 +77,7 @@ def closest_gold(snake, golds):
             min_gold = g
     return min_gold
 
+
 def closest_food(snake, foods):
     """
     Given the current position, returns the closest food position
@@ -79,6 +91,7 @@ def closest_food(snake, foods):
             min_distance = d
             min_food = f
     return min_food
+
 
 def get_attack_head(snakes):
     """
@@ -113,14 +126,15 @@ def is_snake(coord, snakes):
                 return True
     return False
 
+
 def is_challenged(coord, snakes):
     x = coord[0]
     y = coord[1]
     surrounding_coords = [
-        [x+1, y],
-        [x-1, y],
-        [x, y+1],
-        [x, y-1]
+        [x + 1, y],
+        [x - 1, y],
+        [x, y + 1],
+        [x, y - 1]
     ]
     my_snake = find_my_snake(snakes)
     my_head = get_snake_head(my_snake)
@@ -129,6 +143,7 @@ def is_challenged(coord, snakes):
         if head in surrounding_coords and not head == my_head and len(snake['coords']) >= len(my_snake['coords']):
             return True
     return False
+
 
 def is_valid(size, coord, snakes, walls, safety_check=True):
     """
@@ -148,6 +163,7 @@ def is_valid(size, coord, snakes, walls, safety_check=True):
 
     return False
 
+
 def is_safe(size, coord, snakes, walls):
     """
     Checks if the coord is safe to move to (i.e. not surrounded)
@@ -155,10 +171,10 @@ def is_safe(size, coord, snakes, walls):
     x = coord[0]
     y = coord[1]
     surrounding_coords = [
-        [x+1, y],
-        [x-1, y],
-        [x, y+1],
-        [x, y-1]
+        [x + 1, y],
+        [x - 1, y],
+        [x, y + 1],
+        [x, y - 1]
     ]
     invalid_count = 0
     for coord in surrounding_coords:
@@ -166,6 +182,7 @@ def is_safe(size, coord, snakes, walls):
             invalid_count += 1
 
     return invalid_count != 4
+
 
 def is_snake_head(coord, snakes):
     """
@@ -177,12 +194,14 @@ def is_snake_head(coord, snakes):
             return True
     return False
 
+
 def get_snake_length(snake):
     """
     Given snake
     retuns snake length
     """
     return len(snake.get("coords"))
+
 
 def average_snake_length(snakes):
     """
@@ -197,6 +216,7 @@ def average_snake_length(snakes):
             count += 1
     return int(length_sum / count)
 
+
 def need_food(snakes):
     """
     Given snakes
@@ -210,8 +230,8 @@ def need_food(snakes):
 
 
 def direction_to_move(my_coord, destination):
-    x_dist = my_coord[0]-destination[0]
-    y_dist = my_coord[1]-destination[1]
+    x_dist = my_coord[0] - destination[0]
+    y_dist = my_coord[1] - destination[1]
 
     abs_x = abs(x_dist)
     abs_y = abs(y_dist)
@@ -234,4 +254,3 @@ def direction_to_move(my_coord, destination):
             directions.append(EAST)
 
     return directions
-
