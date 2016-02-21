@@ -105,17 +105,17 @@ def get_destination(snakes, walls, foods, golds):
 
     close_gold = utils.closest_gold(my_snake, golds)
     if close_gold:
-        print "going for gold at {}".format(close_gold)
+        # print "going for gold at {}".format(close_gold)
         return close_gold
     else:
         if utils.need_food(snakes):
             close_food = utils.closest_food(my_snake, foods)
-            print "going for food at {}".format(close_food)
+            # print "going for food at {}".format(close_food)
             return close_food
         else:
             attack_head = utils.get_attack_head(snakes)
             if attack_head:
-                print "going for enenmy at {}".format(attack_head)
+                # print "going for enenmy at {}".format(attack_head)
                 return attack_head
     return None
 
@@ -160,7 +160,7 @@ def get_next_position(size, destination, snakes, walls):
     for p in positions:
         new_coord = directions[p]
         if utils.is_valid(size, new_coord, snakes, walls):
-            print "{} is a valid direction to move".format(p)
+            # print "{} is a valid direction to move".format(p)
             return p
     return positions[0]
 
