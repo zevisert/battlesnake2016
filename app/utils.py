@@ -267,19 +267,20 @@ def coord_in_safe_area(coord, walls, snakes, size):
         for snake_body in snake.get('coords'):
             board[snake_body[0]][snake_body[1]] = 1
 
-    res = floodfill(board, coord[1], coord[0])
+    res = floodfill(board, coord[0], coord[1])
     area_to_dest = len(list(yeild_walls(res)))
 
-    size_of_area = size[0]*size[1]
+    size_of_board = size[0] * size[1]
     for snake in snakes:
         for snake_body in snake.get('coords'):
-            size_of_area -= 1
+            size_of_board -= 1
 
     for wall in walls:
-        size_of_area -= 1
+        size_of_board -= 1
 
-    if not area_to_dest <= size_of_area:
-        print "it's a trap!!!!!!!!!!!!"
+    if area_to_dest < size_of_board:
+        print "Flood area is smaller than game board"
+
 
 
 def floodfill(board_matrix, x, y):
@@ -287,7 +288,7 @@ def floodfill(board_matrix, x, y):
     #recursively invoke flood fill on all surrounding cells:
     """
     matrix = board_matrix
-    if matrix[x][y] is 0:
+    if matrix[x][y] == 0:
         matrix[x][y] = -1
 
         if x > 0:
