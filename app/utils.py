@@ -271,8 +271,8 @@ def coord_in_safe_area(coord, walls, snakes, size):
     area_to_dest = len(list(yeild_walls(res)))
 
     if area_to_dest < get_snake_length(find_my_snake(snakes)):
-    	print "I'm at [" + str(find_my_snake(snakes).get('coords')[0]) + ", " + str(find_my_snake(snakes).get('coords')[1]) + "]"
-    	print "I want to get to [" + str(coord[0]) + ", " + str(coord[1]) + "]"
+    	print "I'm at " + str(find_my_snake(snakes).get('coords')[0])
+    	print "I want to get to " + str(coord)
         print "Flood area of " + str(area_to_dest) + " is smaller than my length!"
         print res
         return False
