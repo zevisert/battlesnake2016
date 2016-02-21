@@ -125,7 +125,8 @@ def is_challenged(coord, snakes):
     for snake in snakes:
         head = get_snake_head(snake)
         my_head = get_snake_head(find_my_snake(snakes))
-        return head in surrounding_coords and not head == my_head
+        if head in surrounding_coords and not head == my_head:
+            return True
     return False
 
 def is_valid(size, coord, snakes, walls, safety_check=True):
