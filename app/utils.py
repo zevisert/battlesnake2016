@@ -284,10 +284,9 @@ def floodfill(board_matrix, x, y):
     #recursively invoke flood fill on all surrounding cells:
     """
     matrix = board_matrix
-    if x < 0 or y < 0 or y > len(matrix) - 1 or x > len(matrix[0]) - 1:
-    	print 'Indicies' + str(x) + ' ' + str(y)
+
     if matrix[y][x] == 0:
-        matrix[y][x] = -1
+        matrix[y][x] = 3
         if x > 0:
             matrix = floodfill(matrix, x - 1, y)
         if x < len(matrix[0]) - 2:
@@ -298,7 +297,7 @@ def floodfill(board_matrix, x, y):
             matrix = floodfill(matrix, x, y + 1)
     return matrix
 
-def yeild_walls(matrix, value=-1):
+def yeild_walls(matrix, value=3):
     for row in matrix:
         for i in row:
             if i == value:
