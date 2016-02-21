@@ -19,7 +19,8 @@ def get_taunt():
         "Are these sanitized?",
         "Get rid of that thing when you have that",
         "Does this work in Python 2.7?",
-        "My head hurts..."
+        "My head hurts...",
+        "*moaning*"
     ]
     return taunts[randint(0, len(taunts) - 1)]
 

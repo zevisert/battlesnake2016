@@ -162,7 +162,7 @@ def get_next_position(size, destination, snakes, walls):
         if utils.is_valid(size, new_coord, snakes, walls):
             print "{} is a valid direction to move".format(p)
             return p
-    return NORTH
+    return positions[0]
 
 
 # def possible_positions(walls, snakes, head):
