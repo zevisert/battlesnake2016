@@ -126,7 +126,7 @@ def is_challenged(coord, snakes):
     my_head = get_snake_head(my_snake)
     for snake in snakes:
         head = get_snake_head(snake)
-        if head in surrounding_coords and not head == my_head and len(snake['coords']) > len(my_snake['coords']):
+        if head in surrounding_coords and not head == my_head and len(snake['coords']) >= len(my_snake['coords']):
             return True
     return False
 
