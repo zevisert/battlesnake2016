@@ -154,6 +154,9 @@ def is_valid(size, coord, snakes, walls, safety_check=True):
     width = size[0]
     height = size[0]
 
+    # Print the flood boards
+    coord_in_safe_area(coord, walls, snakes, size)
+
     if x >= 0 and x < width and y >= 0 and y < height:
         if not is_snake(coord, snakes) and not is_wall(coord, walls) and not is_challenged(coord, snakes):
             if not safety_check:
@@ -254,3 +257,51 @@ def direction_to_move(my_coord, destination):
             directions.append(EAST)
 
     return directions
+
+
+def coord_in_safe_area(coord, walls, snakes, size):
+    board = [[0 for j in range(0, size[0])] for i in range(0, size[1])]
+    for wall in walls:
+        board[wall[0]][wall[1]] = 1
+    for snake in snakes:
+        for snake_body in snake.get('coords'):
+            board[snake_body[0]][snake_body[1]] = 1
+
+    res = floodfill(board, coord[1], coord[0])
+    area_to_dest = len(list(yeild_walls(res)))
+
+    size_of_area = size[0]*size[1]
+    for snake in snakes:
+        for snake_body in snake.get('coords'):
+            size_of_area -= 1
+
+    for wall in walls:
+        size_of_area -= 1
+
+    if not area_to_dest <= size_of_area:
+        print "it's a trap!!!!!!!!!!!!"
+
+
+def floodfill(board_matrix, x, y):
+    """
+    #recursively invoke flood fill on all surrounding cells:
+    """
+    matrix = board_matrix
+    if matrix[x][y] is 0:
+        matrix[x][y] = -1
+
+        if x > 0:
+            matrix = floodfill(matrix, x - 1, y)
+        if x < len(matrix[y]) - 1:
+            matrix = floodfill(matrix, x + 1, y)
+        if y > 0:
+            matrix = floodfill(matrix, x, y - 1)
+        if y < len(matrix) - 1:
+            matrix = floodfill(matrix, x, y + 1)
+    return matrix
+
+def yeild_walls(matrix, value=-1):
+    for row in matrix:
+        for i in row:
+            if i == value:
+                yield i
