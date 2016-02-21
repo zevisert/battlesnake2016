@@ -246,7 +246,7 @@ def coord_in_safe_area(coord, walls, snakes, size):
         board[wall[0]][wall[1]] = 1
     for snake in snakes:
         for snake_body in snake.get('coords'):
-            board[snake.get('coords')[0]][snake.get('coords')[2]]
+            board[snake_body[0]][snake_body[1]] = 1
 
     print board
 
