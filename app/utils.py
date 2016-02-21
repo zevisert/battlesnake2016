@@ -258,7 +258,7 @@ def coord_in_safe_area(coord, walls, snakes, size):
     for wall in walls:
         size_of_area -= 1
 
-    if area_to_dest <= size_of_area:
+    if not area_to_dest <= size_of_area:
         print "it's a trap!!!!!!!!!!!!"
 
 
