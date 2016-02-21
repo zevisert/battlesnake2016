@@ -113,6 +113,21 @@ def is_snake(coord, snakes):
                 return True
     return False
 
+def is_challenged(coord, snakes):
+    x = coord[0]
+    y = coord[1]
+    surrounding_coords = [
+        [x+1, y],
+        [x-1, y],
+        [x, y+1],
+        [x, y-1]
+    ]
+    for snake in snakes:
+        head = get_snake_head(snake)
+        my_head = get_snake_head(find_my_snake(snakes))
+        return head in surrounding_coords and not head == my_head
+    return False
+
 def is_valid(size, coord, snakes, walls, safety_check=True):
     """
     Returns true/false if coord is a valid position to move to
@@ -123,7 +138,7 @@ def is_valid(size, coord, snakes, walls, safety_check=True):
     height = size[0]
 
     if x >= 0 and x < width and y >= 0 and y < height:
-        if not is_snake(coord, snakes) and not is_wall(coord, walls):
+        if not is_snake(coord, snakes) and not is_wall(coord, walls) and not is_challenged(coord, snakes):
             if not safety_check:
                 return True
             else:
