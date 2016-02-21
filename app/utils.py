@@ -1,5 +1,5 @@
 from math import sqrt
-from random import randint, random, choice
+from random import randint, choice
 
 import game
 
@@ -28,7 +28,7 @@ def get_taunt():
     infinitives = ["to make a pie.", "for no apparent reason.", "because the sky is green.", "for a disease.",
                    "to be able to make toast explode.", "to know more about archeology."]
 
-    return str(random.choice(s_nouns) + random.choice(s_verbs) + random.choice(s_nouns).lower())
+    return str(choice(s_nouns) + choice(s_verbs) + choice(s_nouns).lower())
 
 
 def find_my_snake(snakes):
