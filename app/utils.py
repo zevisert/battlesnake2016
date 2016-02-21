@@ -199,7 +199,22 @@ def direction_to_move(my_coord, destination):
     abs_x = abs(x_dist)
     abs_y = abs(y_dist)
 
+    directions = []
+
     if abs_x > abs_y:
-        return WEST if x_dist > 0 else EAST
+        directions = [WEST] if x_dist > 0 else [EAST]
+
+        if y_dist > 0:
+            directions.append(NORTH)
+        else:
+            directions.append(SOUTH)
     else:
-        return NORTH if y_dist > 0 else SOUTH
+        directions = [NORTH] if y_dist > 0 else [SOUTH]
+
+        if x_dist > 0:
+            directions.append(WEST)
+        else:
+            directions.append(EAST)
+
+    return directions
+
