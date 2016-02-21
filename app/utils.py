@@ -270,6 +270,10 @@ def coord_in_safe_area(coord, walls, snakes, size):
     res = floodfill(board, coord[0], coord[1])
     area_to_dest = len(list(yeild_walls(res)))
 
+
+    print str(area_to_dest) + 'area'
+    print get_snake_length(find_my_snake(snakes)) + 'len'
+
     if area_to_dest < get_snake_length(find_my_snake(snakes)):
     	print "I'm at " + str(find_my_snake(snakes).get('coords')[0])
     	print "I want to get to " + str(coord)
