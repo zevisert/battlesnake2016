@@ -43,7 +43,7 @@ def start():
     # TODO: Do things with data
 
     return {
-        'taunt': 'battlesnake-python!'
+        'taunt': '*taunt*'
     }
 
 
@@ -87,7 +87,7 @@ def end():
     gaming = False
 
     return {
-        'taunt': 'battlesnake-python!'
+        'taunt': 'we probably won'
     }
 
 
