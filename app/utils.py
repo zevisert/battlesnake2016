@@ -12,6 +12,7 @@ WEST = 'west'
 EAST = 'east'
 
 
+
 def get_taunt():
     """
     Randomly select a taunt from the list
@@ -21,7 +22,7 @@ def get_taunt():
     p_nouns = ["These dudes", "Both of my moms", "All the kings of the world", "Some guys", "All of a cattery's cats",
                "The multitude of sloths living under your bed", "Your homies", "Like, these, like, all these people",
                "Supermen"]
-    s_verbs = ["eats", "kicks", "gives", "treats", "meets with", "creates", "hacks", "configures", "spies on",
+    s_verbs = ["moans", "eats", "kicks", "gives", "treats", "meets with", "creates", "hacks", "configures", "spies on",
                "retards", "meows on", "flees from", "tries to automate", "explodes"]
     p_verbs = ["eat", "kick", "give", "treat", "meet with", "create", "hack", "configure", "spy on", "retard",
                "meow on", "flee from", "try to automate", "explode"]
