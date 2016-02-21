@@ -140,6 +140,9 @@ def is_valid(size, coord, snakes, walls, safety_check=True):
     width = size[0]
     height = size[0]
 
+    # Print the flood boards
+    coord_in_safe_area(coord, walls, snakes, size)
+
     if x >= 0 and x < width and y >= 0 and y < height:
         if not is_snake(coord, snakes) and not is_wall(coord, walls) and not is_challenged(coord, snakes):
             if not safety_check:
