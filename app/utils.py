@@ -288,8 +288,8 @@ def floodfill(board_matrix, x, y):
     #recursively invoke flood fill on all surrounding cells:
     """
     matrix = board_matrix
-    if matrix[x][y] == 0:
-        matrix[x][y] = -1
+    if matrix[y][x] == 0:
+        matrix[y][x] = -1
 
         if x > 0:
             matrix = floodfill(matrix, x - 1, y)
