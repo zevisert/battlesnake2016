@@ -272,7 +272,7 @@ def coord_in_safe_area(coord, walls, snakes, size):
 
 
     print str(area_to_dest) + 'area'
-    print get_snake_length(find_my_snake(snakes)) + 'len'
+    print str(get_snake_length(find_my_snake(snakes))) + 'len'
 
     if area_to_dest < get_snake_length(find_my_snake(snakes)):
     	print "I'm at " + str(find_my_snake(snakes).get('coords')[0])
