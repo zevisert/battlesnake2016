@@ -12,6 +12,7 @@ WEST = 'west'
 EAST = 'east'
 
 
+
 def get_taunt():
     """
     Randomly select a taunt from the list
@@ -21,7 +22,7 @@ def get_taunt():
     p_nouns = ["These dudes", "Both of my moms", "All the kings of the world", "Some guys", "All of a cattery's cats",
                "The multitude of sloths living under your bed", "Your homies", "Like, these, like, all these people",
                "Supermen"]
-    s_verbs = ["eats", "kicks", "gives", "treats", "meets with", "creates", "hacks", "configures", "spies on",
+    s_verbs = ["moans", "eats", "kicks", "gives", "treats", "meets with", "creates", "hacks", "configures", "spies on",
                "retards", "meows on", "flees from", "tries to automate", "explodes"]
     p_verbs = ["eat", "kick", "give", "treat", "meet with", "create", "hack", "configure", "spy on", "retard",
                "meow on", "flee from", "try to automate", "explode"]
@@ -154,9 +155,6 @@ def is_valid(size, coord, snakes, walls, safety_check=True):
     width = size[0]
     height = size[0]
 
-    # Print the flood boards
-    coord_in_safe_area(coord, walls, snakes, size)
-
     if x >= 0 and x < width and y >= 0 and y < height:
         if not is_snake(coord, snakes) and not is_wall(coord, walls) and not is_challenged(coord, snakes):
             if not safety_check:
@@ -288,8 +286,8 @@ def floodfill(board_matrix, x, y):
     #recursively invoke flood fill on all surrounding cells:
     """
     matrix = board_matrix
-    if matrix[x][y] == 0:
-        matrix[x][y] = -1
+    if matrix[y][x] == 0:
+        matrix[y][x] = -1
 
         if x > 0:
             matrix = floodfill(matrix, x - 1, y)
