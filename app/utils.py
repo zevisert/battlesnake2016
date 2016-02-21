@@ -284,7 +284,7 @@ def floodfill(board_matrix, x, y):
     #recursively invoke flood fill on all surrounding cells:
     """
     matrix = board_matrix
-    print 'Indicies' + x + ' ' + y
+    print 'Indicies' + str(x) + ' ' + str(y)
     if matrix[y][x] == 0:
         matrix[y][x] = -1
         if x > 0:
